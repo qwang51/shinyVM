@@ -5,6 +5,11 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Vagrant changed the behaviour between 1.6 and 1.7 versions and now will insert  
+  # auto generated insecure key instead of the default one.
+  # You can cancel this behaviour by setting config.ssh.insert_key = false in your   
+  # Vagrantfile.
+  config.ssh.insert_key = false
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
