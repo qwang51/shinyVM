@@ -6,8 +6,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Add private key path
-  config.ssh.username = “vagrant”
-  config.ssh.password = “vagrant”
+  #config.ssh.username = “vagrant”
+  #config.ssh.password = “vagrant”
   #config.ssh.private_key_path = “wangqianran/.vagrant.d/insecure_private_key”
 
   # All Vagrant configuration is done here. The most common configuration
