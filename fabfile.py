@@ -152,6 +152,8 @@ def sub_install_additional_packages():
     Simply uncomment the lines below and replace the name of the package and the
     URL to its repo if necessary. Then delete the line that says 'pass'.
     """
-    # sudo('R -e "install.packages(\'rmarkdown\', '
-    #     'repos=\'http://cran.rstudio.com/\')"')
-    pass
+    sudo('R -e "install.packages(\'DT\', '
+        'repos=\'http://cran.rstudio.com/\')"')
+    sudo('R -e "install.packages(\'ggplot2\', '
+        'repos=\'http://cran.rstudio.com/\')"')
+    
