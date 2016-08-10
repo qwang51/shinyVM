@@ -156,4 +156,7 @@ def sub_install_additional_packages():
         'repos=\'http://cran.rstudio.com/\')"')
     sudo('R -e "install.packages(\'ggplot2\', '
         'repos=\'http://cran.rstudio.com/\')"')
+    sudo('R -e "install.packages(\'shinythemes\', '
+        'repos=\'http://cran.rstudio.com/\')"')
+        
     
