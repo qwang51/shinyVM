@@ -71,7 +71,7 @@ shinyUI(navbarPage("USDA Database Visualize Tool",
                                        ),
                                        mainPanel(
                                          plotOutput("plot2"),
-                                         fluidRow(splitLayout(tableOutput('cluster')))
+                                         tableOutput('cluster')
                                        )
                                      )
                             )
@@ -149,33 +149,31 @@ shinyUI(navbarPage("USDA Database Visualize Tool",
                                        )
                               )
                    ),
-                   navbarMenu("More",
-                              tabPanel("About",
-                                       br(),
-                                       br(),
-                                       p('Zoe Wang'),
-                                       p('University of San Francisco'),
-                                       p('Aug, 2016')
+                   tabPanel("Datasets",
+                              sidebarLayout(
+                                position='right',
+                                sidebarPanel(
+                                  selectInput("dataset", "Choose a dataset:",
+                                              choices = c("Proximates", "Vitamins", "Minerals",
+                                                          "Lipid Components", "Amino Acid",
+                                                          "Whole Datasets")),
+                                  downloadButton('downloadData', 'Download')
+                                  ),
+                                mainPanel(
+                                  fluidRow(
+                                    splitLayout(tableOutput('table'))
+                                    )
+                                  )
+                                )
+                              
                               ),
-                              tabPanel("Download Datasets",
-                                       sidebarLayout(
-                                         position='right',
-                                         sidebarPanel(
-                                           selectInput("dataset", "Choose a dataset:", 
-                                                       choices = c("Proximates", "Vitamins", "Minerals",
-                                                                   "Lipid Components", "Amino Acid",
-                                                                   "Whole Datasets")),
-                                           downloadButton('downloadData', 'Download')
-                                         ),
-                                         mainPanel(
-                                           fluidRow(
-                                             splitLayout(tableOutput('table'))
-                                             )
-                                           )
-                                         )
-                              ),
-                              tabPanel("Appendix",
-                                       p('Detail data intro')
+                   tabPanel("About",
+                              br(),
+                              br(),
+                              h4('Zoe Wang'),
+                              h4('Email: ', a('qwang51@dons.usfca.edu')),
+                              h4('University of San Francisco'),
+                              h4('Aug, 2016')
                               )
                    )
-))
+)

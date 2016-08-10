@@ -1,4 +1,5 @@
 library(shiny)
+library(ggplot2)
 vitamins <- readRDS('../data/vitamins.rds')
 amino.acids <- readRDS('../data/amino.acids.rds')
 lipid.components <- readRDS('../data/lipid.components.rds')
@@ -44,7 +45,7 @@ shinyServer(function(input, output, session) {
   })
   
   output$cluster <- renderTable({
-    table(clusters()$cluster, foods$food_group)
+    table(foods$food_group, clusters()$cluster)
   })
   
   # Sub Tables
