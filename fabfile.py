@@ -7,7 +7,7 @@ import os
 
 # Origin of our repository, and the repository
 GIT_ORIGIN = 'git@github.com'
-GIT_REPO = 'nsh87/shiny'
+GIT_REPO = 'qwang51/shinyVM'
 
 # Packages to install in Vagrant
 INSTALL_PACKAGES = ['r-base',
