@@ -37,8 +37,8 @@ def remote():
     RAM.
     """
     # Insert values for:
-    env.hosts = 'ec2-52-13.us-west-2.compute.amazonaws.com'  # Your public DNS
-    env.key_filename = os.path.join('/', 'my.pem')  # Path to your AWS .pem key
+    env.hosts = 'ec2-52-25-95-220.us-west-2.compute.amazonaws.com'  # Your public DNS
+    env.key_filename = "~/Downloads/hs698v2.pem"  # Path to your AWS .pem key
 
     # Don't change unless you know what you are doing:
     env.base = '/www-shiny'  # Default location for Shiny Server apps
