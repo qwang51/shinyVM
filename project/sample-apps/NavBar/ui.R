@@ -11,20 +11,39 @@ foods <- readRDS('../data/foods.rds')
 
 shinyUI(navbarPage("USDA Database Visualize Tool",
                    theme = shinytheme("flatly"),
-                   tabPanel("Introduction",
-                            h2('USDA National Nutrient Database for Standard Reference'),
-                            h3('Release 28 (2015)'),
-                            br(),
-                            h4('Introduction'),
-                            p('The USDA National Nutrient Database for Standard Reference (SR) is the major 
-                              source of food composition data in the United States. 
-                              It provides the foundation for most food composition databases in the public and 
-                              private sectors. As information is updated, new versions of the database are released. 
-                              This version, Release 28 (SR28), contains data on 8,789 food items and up to 150 food 
-                              components. It replaces SR27, initially issued in August 2014 and revised in May 2015.
-                              The data source can be found ', 
-                              a(href='http://www.ars.usda.gov/ba/bhnrc/ndl', 'here'),'.'),
-                            br(),
+                   tabPanel("About",
+                            mainPanel(
+                              tabsetPanel(
+                                tabPanel("USDA Database",
+                                         br(),br(),
+                                         strong('USDA National Nutrient Database for Standard Reference'),
+                                         p('Release 28 (2015)'),
+                                         p('The USDA National Nutrient Database for Standard Reference (SR) is the major 
+                                            source of food composition data in the United States. 
+                                            It provides the foundation for most food composition databases in the public and 
+                                            private sectors. As information is updated, new versions of the database are released. 
+                                            This version, Release 28 (SR28), contains data on 8,789 food items and up to 150 food 
+                                            components. It replaces SR27, initially issued in August 2014 and revised in May 2015.
+                                            The data source can be found ', 
+                                            a(href='http://www.ars.usda.gov/ba/bhnrc/ndl', 'here'),'.')),
+                            tabPanel("The Project",
+                                     br(),br(),
+                                     p("This project is aksjdhfjkash")
+                                     ),
+                            tabPanel("Contact",
+                                     br(),
+                                     br(),
+                                     p('Zoe Wang'),
+                                     p('Email: ', a('qwang51@dons.usfca.edu')),
+                                     p('University of San Francisco'),
+                                     p('Aug, 2016')
+                                     )
+                              )
+                            )
+                           
+                            
+                   ),
+                   tabPanel('Data Structure',
                             h4('Database Content'),
                             p('The database consists of several sets of data: food descriptions, 
                               nutrients, weights and measures, footnotes, and sources of data. This visualization
@@ -35,14 +54,16 @@ shinyUI(navbarPage("USDA Database Visualize Tool",
                               included 150 main nutrients, and devided them into five categories: ',
                               strong('Proximates, ', 'Vitamins, ', 'Minerals, ', 'Lipid Components, '), 'and',
                               strong('Amino Acids'),'.')
-                            
-                   ),
-                   navbarMenu("Plots",
+                            ),
+                   navbarMenu("Visualization",
                             tabPanel('Bar Chart',
                               sidebarLayout(
                                 position='right',
+                  
                                 sidebarPanel(
                                   #'input.dataset === "foods"',
+                                  helpText('The Nutrient data shows mean nutrient values per 
+                                         100 g of the edible portion of food'),
                                   selectizeInput(
                                     'show_vars6', 'Nutrients:', 
                                     choices = names(foods[,-c(1,2,3)]), multiple = FALSE
@@ -67,11 +88,15 @@ shinyUI(navbarPage("USDA Database Visualize Tool",
                                          selectInput('ycol', 'Y Variable', names(foods)[-c(1,2,3)],
                                                      selected=names(foods)[[9]]),
                                          numericInput('clusters', 'Cluster count', 3,
-                                                      min = 1, max = 25)
+                                                      min = 1, max = 25),
+                                         selectizeInput('group', 'Select food groups to show which cluster they belong to most', 
+                                                        choices = unique(foods$food_group),
+                                                        multiple = TRUE)
                                        ),
                                        mainPanel(
                                          plotOutput("plot2"),
-                                         tableOutput('cluster')
+                                         #tableOutput('cluster')
+                                         DT::dataTableOutput('cluster')
                                        )
                                      )
                             )
@@ -149,6 +174,9 @@ shinyUI(navbarPage("USDA Database Visualize Tool",
                                        )
                               )
                    ),
+                   tabPanel("Calculate"
+                     
+                   ),
                    tabPanel("Datasets",
                               sidebarLayout(
                                 position='right',
@@ -166,14 +194,6 @@ shinyUI(navbarPage("USDA Database Visualize Tool",
                                   )
                                 )
                               
-                              ),
-                   tabPanel("About",
-                              br(),
-                              br(),
-                              h4('Zoe Wang'),
-                              h4('Email: ', a('qwang51@dons.usfca.edu')),
-                              h4('University of San Francisco'),
-                              h4('Aug, 2016')
                               )
                    )
 )

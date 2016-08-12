@@ -1,4 +1,4 @@
-setwd('~/Github/shinyVM/project/food')
+setwd('~/Github/shinyVM/project/sr28docs')
 data_dir <- "data"
 
 
@@ -178,6 +178,14 @@ names(lipid.components) <- make.names(names(lipid.components), unique = TRUE)
 names(amino.acids) <- make.names(names(amino.acids), unique = TRUE)
 names(foods) <- make.names(names(foods), unique = TRUE)
 
+# Create Nutrient table
+sub.nutr.def <- NUTR_DEF[NUTR_DEF$nutrient_description %in% 
+                c(Proximates[-c(1,2,3)], Minerals[-c(1,2,3)], 
+                  Vitamins[-c(1,2,3)], Lipid.Components[-c(1,2,3)],
+                  Amino.Acids[-c(1,2,3)]),]
+sub.nutr.def <- sub.nutr.def[,c('nutrient_description', 'unit')]
+sub.nutr.def <- rbind(sub.nutr.def, data.frame(nutrient_description=c('omega-3','omega-6'), unit=c('g','g')))
+# NUTR_DEF[grep('n-3',NUTR_DEF$nutrient_description),]
 
 # Save tables to .rds file
 saveRDS(foods, file='~/GitHub/shinyVM/project/sample-apps/data/foods.rds')
@@ -186,7 +194,8 @@ saveRDS(minerals, file='~/GitHub/shinyVM/project/sample-apps/data/minerals.rds')
 saveRDS(vitamins, file='~/GitHub/shinyVM/project/sample-apps/data/vitamins.rds')
 saveRDS(lipid.components, file='~/GitHub/shinyVM/project/sample-apps/data/lipid.components.rds')
 saveRDS(amino.acids, file='~/GitHub/shinyVM/project/sample-apps/data/amino.acids.rds')
-
+saveRDS(WEIGHT, file='~/GitHub/shinyVM/project/sample-apps/data/weight.rds')
+saveRDS(sub.nutr.def, file='~/GitHub/shinyVM/project/sample-apps/data/nutr.def.rds')
 
 
 

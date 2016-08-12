@@ -44,8 +44,17 @@ shinyServer(function(input, output, session) {
      #      c(1:input$clusters), fill=clusters()$cluster, cex=0.8)
   })
   
-  output$cluster <- renderTable({
-    table(foods$food_group, clusters()$cluster)
+  output$cluster <- DT::renderDataTable({
+    #table(foods$food_group, clusters()$cluster)
+    df <- as.data.frame.matrix(table(foods$food_group, clusters()$cluster))
+    df <- cbind('food_group'=rownames(df), df)
+    rownames(df) <- 1:nrow(df)
+    DT::datatable({
+     if(length(input$group) != 0){
+        df <- df[df$food_group %in% input$group, ]
+      }
+      df
+    })
   })
   
   # Sub Tables
