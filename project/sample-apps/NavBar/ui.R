@@ -28,7 +28,7 @@ shinyUI(navbarPage("USDA Database Visualize Tool",
                                             a(href='http://www.ars.usda.gov/ba/bhnrc/ndl', 'here'),'.')),
                             tabPanel("The Project",
                                      br(),br(),
-                                     p("This project is aksjdhfjkash")
+                                     p("This project is based on ")
                                      ),
                             tabPanel("Contact",
                                      br(),
