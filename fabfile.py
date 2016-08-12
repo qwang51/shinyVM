@@ -37,8 +37,8 @@ def remote():
     RAM.
     """
     # Insert values for:
-    env.hosts = 'ec2-52-43-182-229.us-west-2.compute.amazonaws.com'  # Your public DNS
-    env.key_filename = "~/Downloads/hs698v3.pem"  # Path to your AWS .pem key
+    env.hosts = 'ec2-52-32-5-206.us-west-2.compute.amazonaws.com'  # Your public DNS
+    env.key_filename = "~/Downloads/shiny.pem"  # Path to your AWS .pem key
 
     # Don't change unless you know what you are doing:
     env.base = '/www-shiny'  # Default location for Shiny Server apps
@@ -148,7 +148,7 @@ def sub_install_rmarkdown():
 def sub_install_additional_packages():
     """This is an example function demonstrating how to add the installation of
     an R package to the setup process.
-    
+
     Simply uncomment the lines below and replace the name of the package and the
     URL to its repo if necessary. Then delete the line that says 'pass'.
     """
@@ -158,5 +158,3 @@ def sub_install_additional_packages():
         'repos=\'http://cran.rstudio.com/\')"')
     sudo('R -e "install.packages(\'shinythemes\', '
         'repos=\'http://cran.rstudio.com/\')"')
-        
-    
