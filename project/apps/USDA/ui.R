@@ -7,6 +7,8 @@ lipid.components <- readRDS('../data/lipid.components.rds')
 minerals <- readRDS('../data/minerals.rds')
 proximates <- readRDS('../data/proximates.rds')
 foods <- readRDS('../data/foods.rds')
+weight <- readRDS('../data/weight.rds')
+nutr_def <- readRDS('../data/nutr_def.rds')
 
 
 shinyUI(navbarPage("USDA Database Visualize Tool",
@@ -174,8 +176,25 @@ shinyUI(navbarPage("USDA Database Visualize Tool",
                                        )
                               )
                    ),
-                   tabPanel("Calculate"
-                     
+                   tabPanel("Calculate",
+                            sidebarLayout(
+                              position='right',
+                              sidebarPanel(
+                                #selectInput(
+                                 # 'food_group', 'Select a food group', 
+                                  #choices = unique(foods$food_group)
+                                #),
+                                uiOutput('Group1'),
+                                uiOutput('Group2'),
+                                selectInput('nutr', 'Select a nutrient',
+                                            choices = names(foods[,-c(1,2,3)])),
+                                numericInput('amt', 'Amount:', 100)
+                              ),
+                              mainPanel(
+                                #fluidRow(splitLayout(DT::dataTableOutput('view')))
+                                textOutput('result')
+                              )
+                            )
                    ),
                    tabPanel("Datasets",
                               sidebarLayout(

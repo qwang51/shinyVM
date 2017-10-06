@@ -6,6 +6,8 @@ lipid.components <- readRDS('../data/lipid.components.rds')
 minerals <- readRDS('../data/minerals.rds')
 proximates <- readRDS('../data/proximates.rds')
 foods <- readRDS('../data/foods.rds')
+weight <- readRDS('../data/weight.rds')
+nutr_def <- readRDS('../data/nutr_def.rds')
 
 shinyServer(function(input, output, session) {
   
@@ -126,9 +128,30 @@ shinyServer(function(input, output, session) {
       write.csv(datasetInput(), file)
     }
   )
+ 
+  # Calculate 
+  output$Group1 <- renderUI(
+    selectInput('food_group', 'Select a food group',
+                choices = unique(foods$food_group))
+  )
   
-  output$home <- renderPrint({
-    summary(foods)
+  output$Group2 <- renderUI(
+    selectInput('food', 'Select a food',
+                foods[foods$food_group == input$food_group, 'food_desc'])
+  )
+  
+  subfood1 <- reactive(foods[foods$food_group == input$food_group,])
+  subfood2 <- reactive(subfood1()[subfood1()$food_desc == input$food,])
+  
+  output$view <- DT:: renderDataTable({
+    subfood1()
   })
+  
+  output$result <- renderText({
+    r <- foods[foods$food_desc == input$food, input$nutr] * input$amt / 100
+    str1 <- paste('The amount of', input$nutr, 'in', input$amt, 'g', input$food, 'is:', r)
+    str1
+  })
+  
 
 })
